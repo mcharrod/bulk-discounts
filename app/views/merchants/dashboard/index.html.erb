@@ -5,6 +5,7 @@
     <h2><%= @merchant.name %> Store</h2>
 <div>  <%= link_to "View store items", "/merchants/#{@merchant.id}/items" %>
   <br><%= link_to "View invoices", "/merchants/#{@merchant.id}/invoices" %></div>
+  <b><%= link_to "View store discounts", "/merchants/#{@merchant.id}/discounts" %></b>
 </ul>
 
 <div>

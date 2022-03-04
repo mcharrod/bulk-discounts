@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     patch ':merchant_id/invoices/:invoice_id', to: 'invoices#update'
 
     get ':id/discounts', to: 'discounts#index'
+    get ':merchant_id/discounts/:discount_id', to: 'discounts#show'
   end
 
   namespace :admin, module: :admin do

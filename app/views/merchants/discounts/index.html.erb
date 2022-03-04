@@ -2,7 +2,12 @@
 
 <h2>Store Discounts</h2>
   <% @discounts.each do |discount| %>
-    <%= discount.name %>
+  <div id="discount-<%= discount.id %>">
+    <li><%= discount.name %></li>
+    <p><%= link_to "View this discount", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %></p>
+    <p>Percent off: <%= discount.percent %></p>
+    <p>Minimum order quantity: <%= discount.min_quantity %></p>
+  </div>
   <% end %>
 <h3>Upcoming Holidays</h3>
 

@@ -7,6 +7,14 @@ describe "Merchant Dashboard", type: :feature do
     visit "/merchants/#{@merchant1.id}"
   end
 
+  it 'has a link to discount index' do
+    expect(page).to have_link("View store discounts")
+
+    click_link("View store discounts")
+
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts")
+  end
+
   it "displays the name of the merchant on the page" do
     expect(page).to have_content(@merchant1.name)
   end
