@@ -1,6 +1,9 @@
 <h1>Discount index</h1>
 
-
+<h2>Store Discounts</h2>
+  <% @discounts.each do |discount| %>
+    <%= discount.name %>
+  <% end %>
 <h3>Upcoming Holidays</h3>
 
 <div id="holidays">

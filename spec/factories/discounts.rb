@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :discount do
-    min_quantity { 1 }
-    percent { 1 }
-    merchant { nil }
+    merchant
+    min_quantity { 3 }
+    percent { 10 }
+    name { "#{Faker::Commerce.product_name} discount" }
   end
 end
