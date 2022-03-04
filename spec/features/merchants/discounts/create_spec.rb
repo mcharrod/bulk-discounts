@@ -14,7 +14,7 @@ describe 'discount creation' do
     expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/new")
   end
 
-  it 'page has a form for discount info' do
+  it 'form makes a new discount' do
     visit "/merchants/#{@merchant1.id}/discounts/new"
 
     fill_in "Discount name:", with: "Happy people discount"
@@ -22,8 +22,16 @@ describe 'discount creation' do
     fill_in "Minimum purchase quantity:", with: 10
 
     click_button("Save")
-    save_and_open_page
     expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts")
     expect(page).to have_content("Happy people discount")
+  end
+
+  it 'form incomplete flashes error message' do
+    visit "/merchants/#{@merchant1.id}/discounts/new"
+
+    fill_in "Discount name:", with: "incomplete"
+
+    click_button("Save")
+    expect(page).to have_content("Error: Percent can't be blank, Min quantity can't be blank")
   end
 end
