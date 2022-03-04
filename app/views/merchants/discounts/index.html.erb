@@ -1,0 +1,8 @@
+<h1>Discount index</h1>
+
+
+<h3>Upcoming Holidays</h3>
+<% @holidays.each do |holiday| %>
+  <li><%= holiday.name %></li>
+  <p>Date: <%= holiday.date %></p>
+<% end %>
