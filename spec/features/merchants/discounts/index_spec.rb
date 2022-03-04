@@ -15,12 +15,6 @@ RSpec.describe 'merchant discount index page' do
     expect(current_path).to eq("/merchants/#{merchant.id}/discounts/#{discount1.id}")
   end
 
-  it 'has a route and header' do
-    merchant = create(:merchant)
-    visit "/merchants/#{merchant.id}/discounts"
-    expect(page).to have_content("Discount index")
-  end
-
   it 'displays upcoming holidays' do
     merchant = create(:merchant)
     visit "/merchants/#{merchant.id}/discounts"
