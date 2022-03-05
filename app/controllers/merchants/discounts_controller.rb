@@ -37,6 +37,19 @@ class Merchants::DiscountsController < ApplicationController
     @discount = @merchant.discounts.find(params[:discount_id])
   end
 
+  def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = @merchant.discounts.find(params[:discount_id])
+
+    # if valid_data?(discount_params)
+      @discount.update(discount_params)
+      redirect_to "/merchants/#{@merchant.id}/discounts/#{@discount.id}"
+    # else
+    #   redirect_to "/merchants/#{@merchant.id}/discounts/#{@discount.id}/edit"
+    #   flash[:alert] = "Error. Something went wrong. Please try again later."
+    # end
+  end
+
   private
     def discount_params
       params.permit(:name, :percent, :min_quantity)

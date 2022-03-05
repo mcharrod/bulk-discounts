@@ -12,6 +12,25 @@ describe 'discount edit' do
   end
 
   it 'updates the item' do
-    
+    merchant1 = create(:merchant)
+    discount1 = create(:discount, merchant: merchant1)
+    visit "/merchants/#{merchant1.id}/discounts/#{discount1.id}/edit"
+
+    fill_in "Discount name:", with: "BOGO"
+
+    click_button("Save")
+    expect(current_path).to eq("/merchants/#{merchant1.id}/discounts/#{discount1.id}")
+
+    expect(page).to have_content("BOGO")
+  end
+
+  xit 'sends user alert when invalid data is entered' do
+    merchant1 = create(:merchant)
+    discount1 = create(:discount, merchant: merchant1)
+
+    visit "/merchants/#{merchant1.id}/discounts/#{discount1.id}/edit"
+    fill_in "Percent off:", with: 200
+    click_button "Save"
+    expect(page).to have_content("Error. Something went wrong. Please try again later.")
   end
 end
