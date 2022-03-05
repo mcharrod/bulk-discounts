@@ -26,12 +26,16 @@ describe 'discount creation' do
     expect(page).to have_content("Happy people discount")
   end
 
-  it 'form incomplete flashes error message' do
+  it 'form invalid data flashes error messages' do
     visit "/merchants/#{@merchant1.id}/discounts/new"
 
-    fill_in "Discount name:", with: "incomplete"
+    fill_in "Percent off:", with: 200
+    fill_in "Minimum purchase quantity:", with: -1
 
     click_button("Save")
-    expect(page).to have_content("Error: Percent can't be blank, Min quantity can't be blank")
+    
+    expect(page).to have_content("Error: Name can't be blank")
+    expect(page).to have_content("Percent must be less than or equal to 100")
+    expect(page).to have_content("Min quantity must be greater than or equal to 0")
   end
 end
