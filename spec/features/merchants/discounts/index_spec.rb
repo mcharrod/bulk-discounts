@@ -24,6 +24,25 @@ RSpec.describe 'merchant discount index page' do
     expect(current_path).to eq("/merchants/#{merchant.id}/discounts/new")
   end
 
+  it 'has a link to delete a discount' do
+    merchant = create(:merchant)
+    discount1 = create(:discount, merchant: merchant)
+    discount2 = create(:discount, merchant: merchant)
+
+    visit "merchants/#{merchant.id}/discounts"
+
+    expect(page).to have_content(discount1.name)
+    expect(page).to have_content(discount2.name)
+
+    within "#discount-#{discount1.id}" do
+      click_link "Delete this discount"
+    end
+
+    expect(current_path).to eq("/merchants/#{merchant.id}/discounts")
+    expect(page).not_to have_content(discount1.name)
+    expect(page).to have_content(discount2.name)
+  end
+
   it 'displays upcoming holidays' do
     merchant = create(:merchant)
     visit "/merchants/#{merchant.id}/discounts"
