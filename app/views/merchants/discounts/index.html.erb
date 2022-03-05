@@ -7,6 +7,7 @@
     <div id="discount-<%= discount.id %>">
       <li><%= discount.name %></li>
       <p><%= link_to "View this discount", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %></p>
+      <p><%= link_to "Delete this discount", "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete %></p>
       <p>Percent off: <%= discount.percent %></p>
       <p>Minimum order quantity: <%= discount.min_quantity %></p>
     </div>

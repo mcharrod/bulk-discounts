@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'thing' do
-  it 'does thing' do
+describe 'discount deletion' do
+  it '' do
   end
 end
