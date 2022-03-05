@@ -11,7 +11,6 @@ RSpec.describe 'Shows 1 invoice, and all its attributes', type: :feature do
     @invoice2 = @customer2.invoices.create!(status: 1)
     @invoice3 = @customer2.invoices.create!(status: 1)
     @invoice_item1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, quantity: 2, unit_price: 125, status: 1)
-
   end
 
   it "links from the merchants/invoices index to merch/inv/show" do
