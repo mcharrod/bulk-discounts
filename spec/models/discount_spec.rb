@@ -8,12 +8,10 @@ RSpec.describe Discount, type: :model do
   describe 'validations' do
     it { should validate_presence_of :name }
     it { should validate_presence_of :min_quantity }
-    it { should validate_presence_of :percent }
-  end
+    it { should validate_numericality_of(:min_quantity).is_greater_than_or_equal_to(0) }
 
-  xit 'range validation' do
-    merchant = create(:merchant)
-    invalid_discount = Discount.create!(percent: 200, min_quantity: 2, name: "negative discount", merchant_id: merchant.id)
-    expect(valid_data?(invalid_discount.params)).to eq(false)
+    it { should validate_presence_of :percent }
+    it { should validate_numericality_of(:percent).is_greater_than_or_equal_to(0) }
+    it { should validate_numericality_of(:percent).is_less_than_or_equal_to(100) }
   end
 end
