@@ -1,14 +1,13 @@
 class Merchants::InvoicesController < ApplicationController
+  before_action :merchant
 
   def index
-    @merchant = Merchant.find(params[:id])
     @merch_invoice = @merchant.invoices.distinct
   end
 
   def show
     @invoice = Invoice.find(params[:invoice_id])
-    @items = @invoice.items
-    @merchant = Merchant.find(params[:merchant_id])
+    @discounts = @invoice.discount_info
   end
 
   def update
@@ -16,6 +15,12 @@ class Merchants::InvoicesController < ApplicationController
     @inv_item.update(status: params[:status])
 
     redirect_to "/merchants/#{params[:merchant_id]}/invoices/#{params[:invoice_id]}"
+
   end
+  private
+
+    def merchant
+      @merchant = Merchant.find(params[:merchant_id] || params[:id])
+    end
 
 end

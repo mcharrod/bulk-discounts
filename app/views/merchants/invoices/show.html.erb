@@ -8,9 +8,16 @@
   <li>Invoice status: <%= @invoice.status %></li>
 </ul>
 
+<p>Discounted Revenue: <%= number_to_currency((@invoice.total_revenue - @discounts[:saved_money]).fdiv(100)) %></p>
+
+
+
 <div class="center-col2">
 <h3>Items in this invoice </h3>
 <% @invoice.invoice_items.each do |invoice_item| %>
+  <% if @discounts[invoice_item.id] %>
+    <%= link_to "view this discount", "/merchants/#{@merchant.id}/discounts/#{@discounts[invoice_item.id]}" %><br>
+  <% end %>
   Item name: <%= invoice_item.item.name %><br>
   Item price: <%= invoice_item.item.unit_price %><br>
   Quantity purchased: <%= invoice_item.quantity %>
@@ -19,6 +26,7 @@
       <%=form.select :status, ['pending', 'shipped', 'packaged'], selected: invoice_item.status %>
       <%= form.submit "Update Item Status" %>
 <% end %>
+<br><br>
 
 <%end%></div><br>
 <h3> Total amount due on <%="#{@invoice.customer.first_name}"%>'s invoice: $<%= "#{@invoice.total_revenue}"%>

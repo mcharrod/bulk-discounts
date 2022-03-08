@@ -9,6 +9,7 @@ RSpec.describe 'next holiday API' do
     # calling our method to make the API request
     next_holidays = HolidayFacade.next_holidays
 
+
     expect(next_holidays.first.name).to eq(parsed.first[:localName])
   end
 end

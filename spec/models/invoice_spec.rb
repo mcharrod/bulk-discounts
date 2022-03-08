@@ -19,6 +19,35 @@ RSpec.describe Invoice, type: :model do
       it { should have_many(:transactions)}
     end
 
+    it '#discounted_revenue' do
+      merchant1 = create(:merchant)
+      invoice1 = create(:invoice)
+
+      item1 = create(:item, merchant: merchant1)
+
+
+      # 4 invoice items with 5 quantity and 10 unit price
+
+      # make this 4 again soon
+      ii_list = create(:invoice_item, quantity: 5, unit_price: 10, invoice: invoice1, item: item1)
+      # 5 x 10 = 50 and 50 x 4 = 200 total revenue on qualified items
+
+      # 1 invoice item priced 10 not qualified for our discount.
+      # 210 total revenue before discounts.
+      ii = create(:invoice_item, quantity: 1, unit_price: 10, invoice: invoice1, item: item1)
+
+      # discounts with the same quantity
+      # higher discount is 20 percent off, so 200 X .8 = 160
+      # add 10 to 160 for item not qualified for discount.
+      # 170 discounted revenue
+      lower_discount = create(:discount, min_quantity: 5, percent: 10, merchant: merchant1)
+      higher_discount = create(:discount, min_quantity: 5, percent: 20, merchant: merchant1)
+
+      # expect(invoice1.discounted_revenue).to eq(50)
+
+
+    end
+
     it "tests the total_revenue" do
       @merchant1 = Merchant.create!(name: "The Tornado")
       @item1 = @merchant1.items.create!(name: "SmartPants", description: "IQ + 20", unit_price: 125)
