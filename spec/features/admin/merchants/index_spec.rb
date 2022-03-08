@@ -225,6 +225,8 @@ RSpec.describe 'admin merchant index page', type: :feature do
     visit '/admin/merchants'
     within("#top-5") do
 
+
+
       expect("33520").to appear_before("18802")
       expect("18802").to appear_before("18290")
       expect("18290").to appear_before("8690")

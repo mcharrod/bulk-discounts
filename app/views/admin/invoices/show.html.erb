@@ -24,6 +24,9 @@
       <li>Item status: <%= item.status %></li></p>
       <%end%>
     </ul>
-  <h3> Bill <%="#{@invoice.customer.first_name}"%><br> $<%= "#{@invoice.total_revenue}"%>
+
+    <h3> Total Revenue before discounts: $<%= "#{@invoice.total_revenue.fdiv(100)}"%></h3>
+    <h3>Discounted Revenue: <%= number_to_currency((@invoice.total_revenue - @discounts[:saved_money]).fdiv(100)) %></h3>
+
 </div>
 </div>

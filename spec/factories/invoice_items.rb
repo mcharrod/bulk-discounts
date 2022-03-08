@@ -4,7 +4,7 @@ FactoryBot.define do
     item
 
     quantity { Faker::Number.within(range: 1..500) }
-    unit_price { Faker::Number.within(range: 1..100000) }
+    unit_price { Faker::Number.within(range: 1..100) }
     status { 0 }
   end
 end

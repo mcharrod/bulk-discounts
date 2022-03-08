@@ -43,6 +43,8 @@ gem 'simple_form'
 gem 'popper_js'
 gem 'tether-rails'
 gem 'faraday'
+gem 'factory_bot_rails'
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,13 +53,12 @@ group :development, :test do
   gem 'shoulda-matchers' # requires config
   gem 'launchy'
   gem 'orderly'
-  gem 'factory_bot_rails'
-  gem 'faker'
   gem 'pry'
   gem 'simplecov' # simplecov.start in rails_helper
 end
 
 group :development do
+  gem 'irbtools'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
