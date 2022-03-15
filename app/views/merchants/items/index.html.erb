@@ -9,7 +9,7 @@
       <ol>
         <h4> Top five selling items</h4>
         <% @merchant.top_five.each do |item|%>
-          <div class="container">
+          <div class="container card">
             <li>
               <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %>
               <br> Revenue Generated: <%=item.money_made%>
@@ -23,50 +23,47 @@
     </div>
 
 
+
     <div class="in_stock vertical-column">
       <h4>Items in inventory</h4>
-      <ul>
         <div id="enabled">
           <%@merchant.ordered_items.enabled.each do |item| %>
-          <div id="item-<%= item.id %>"class="center-col">
-            <li>Name: <%= item.name %>
-              <br>
-              Status: <%= item.status %>
-              <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>
-              <% statusing = [ "enabled", "enable" ] %>
-              <% statusing = [ "disabled", "disable" ] if item.status == "enabled" %>
-              <%= form.hidden_field :status, value: statusing[0] %>
-              <%= form.submit statusing[1] %>
-              <%= button_to "View item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %><br>
-              <% end %>
-            </li>
+          <div class="py-2 px-4">
+            <div id="item-<%= item.id %>"class="center-col card py-2">
+              <div class="card-body">
+                <h5 class="card-title"><%= item.name %></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Status: <%= item.status %></h6>
+                <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>
+                  <% statusing = [ "enabled", "enable" ] %>
+                  <% statusing = [ "disabled", "disable" ] if item.status == "enabled" %>
+                  <%= form.hidden_field :status, value: statusing[0] %>
+                  <%= form.submit statusing[1], class: 'btn-primary' %>
+                <% end %>
+                <%= button_to "View item", "/merchants/#{@merchant.id}/items/#{item.id}", class: 'btn-primary', method: :get %><br>
+              </div>
+            </div>
           </div>
           <% end  %>
         </div>
-      </ul>
     </div>
 
     <div class="out_of_stock vertical-column">
       <h4>Not in inventory</h4>
-      <ul id="disabled">
-        <%@merchant.ordered_items.disabled.each do |item| %>
+      <%@merchant.ordered_items.disabled.each do |item| %>
         <div id="item-<%= item.id %>">
           <div class="item-box">
-            <li>
-              Name: <%= item.name %>
-              Status: <%= item.status %>
-            </li>
+            Name: <%= item.name %>
+            Status: <%= item.status %>
             <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?mode=button", method: :patch, local: true do |form| %>
-            <% statusing = [ "enabled", "enable" ] %>
-            <% statusing = [ "disabled", "disable" ] if item.status == "enabled" %>
-            <%= form.hidden_field :status, value: statusing[0] %>
-            <%= form.submit statusing[1] %>
+              <% statusing = [ "enabled", "enable" ] %>
+              <% statusing = [ "disabled", "disable" ] if item.status == "enabled" %>
+              <%= form.hidden_field :status, value: statusing[0] %>
+              <%= form.submit statusing[1] %>
             <% end %>
             <%= button_to "View item", "/merchants/#{@merchant.id}/items/#{item.id}", method: :get %>
           </div>
         </div>
-        <% end  %>
-      <ul>
+      <% end  %>
     </div>
   </div>
 </div>
