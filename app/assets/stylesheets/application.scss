@@ -13,7 +13,7 @@
   flex-direction: row;
   flex: 2;
   text-align: left;
-  justify-content: center;
+  justify-content: space-between;
 }
 .merchant-adm2{
   display: flex;
@@ -21,6 +21,11 @@
   flex: 2;
   // padding-left: 13rem;
   text-align: left;
+}
+
+.vertical-column{
+  display: flex;
+  flex-direction: column
 }
 
 .left-div{

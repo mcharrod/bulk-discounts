@@ -1,11 +1,22 @@
 <div class="container text-center">
   <div class="merchant-adm">
-<ul>
-<h1>Admin: Invoices</h1>
-<% @invoices.each do |invoice| %>
-  <li><%=link_to "Invoice Number: #{invoice.id}", "/admin/invoices/#{invoice.id}" %>
-    <%="Order Status: #{invoice.status}" %></li>
-<% end  %>
-</ul>
+    <h1>Admin Invoices</h1>
+  </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Invoice</th>
+          <th scope="col">Order Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @invoices.each do |invoice| %>
+        <tr>
+          <td><%=link_to "View invoice ##{invoice.id}", "/admin/invoices/#{invoice.id}" %></td>
+          <td><%= invoice.status %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
 </div>
-</div

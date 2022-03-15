@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'merchant item index', type: :feature do
+
+
   it 'displays all items' do
     merchant = create(:merchant)
 

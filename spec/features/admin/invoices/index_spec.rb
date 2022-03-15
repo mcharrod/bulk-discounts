@@ -15,21 +15,20 @@ RSpec.describe 'Invoices', type: :feature do
   end
 
 
-  # I think we are looking at the invoices index on the admin side - Katy
   it "Admin invoice index page" do
 
     visit "/admin/invoices"
 
-    expect(page).to have_content("Invoice Number: #{@invoice1.id}")
-    expect(page).to have_content("Invoice Number: #{@invoice2.id}")
-    expect(page).to have_content("Invoice Number: #{@invoice3.id}")
+    expect(page).to have_content("View invoice ##{@invoice1.id}")
+    expect(page).to have_content("View invoice ##{@invoice2.id}")
+    expect(page).to have_content("View invoice ##{@invoice3.id}")
   end
 
 
   it "has a link to the invoice show page" do
     visit "/admin/invoices"
 
-    click_link("Invoice Number: #{@invoice1.id}")
+    click_link("View invoice ##{@invoice1.id}")
     expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
   end
 end
